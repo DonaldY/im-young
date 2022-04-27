@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.donald.proto";
+
+// 消息类型
+enum ChatType {
+
+    C2C = 0;        // 单聊
+    GROUP_CHAT = 1; // 群聊
+}

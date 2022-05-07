@@ -3,6 +3,76 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.donald.proto";
 
+enum ActionType {
+
+    CONNECT = 0;          // 连接
+
+
+    /////////////////////////// 单聊消息 /////////////////////
+    SEND_C2C_MSG = 0x100;             // 发送消息
+    SEND_C2C_MSG_RESPONSE = 0x101;    // 发送消息响应
+    SYNC_C2C_MSG = 0x102;             // 消息多端同步
+
+    PULL_C2C_MSG = 2004;              // 主动拉取更久远消息
+    PULL_C2C_MSG_RESPONSE = 2005;     // 拉取更久远消息响应
+
+    OPERATE_C2C_MSG = 2006;          // 回执、删除、撤回消息
+    OPERATE_C2C_MSG_RESPONSE = 2007; // 回执、删除、撤回消息响应
+
+    SYNC_OPERATE_C2C_MSG = 2008;  // 同步回执、删除、撤回消息
+
+    COMBINE_FORWARD_MSG = 2009; // 合并转发消息
+    COMBINE_FORWARD_MSG_RESPONSE = 2010; // 合并转发消息响应
+
+    PULL_C2C_MSG_FORWARD = 2013; // 主动拉取更新消息（搜索消息查看上下文时需要）
+    PULL_C2C_MSG_FORWARD_RESPONSE = 2014; // 拉取更新消息响应
+
+    QUERY_MULTI_C2C_MSG_READ_UNREAD = 2015;  // 批量查询单聊消息是否已读
+    QUERY_MULTI_C2C_MSG_READ_UNREAD_RESPONSE = 2016; // 批量查询单聊消息是否已读响应
+
+    QUERY_MULTI_C2C_MSG_LISTEN_STATUS = 2017; // 批量查询单聊消息是否已听
+    QUERY_MULTI_C2C_MSG_LISTEN_STATUS_RESPONSE = 2018; // 批量查询单聊消息是否已听响应
+
+    NOTIFY_INPUTTING = 2019;   // 通知对方自己正在输入
+    NOTIFY_INPUTTING_RESPONSE = 2020;  // 通知对方自己正在输入响应
+
+    SYNC_INPUTTING_NOTIFY = 2021; // 对方正在输入同步
+
+    QUERY_ONLINE_STATUS = 2022;   // 查询对方在线状态
+    QUERY_ONLINE_STATUS_RESPONSE = 2023;  // 查询对方在线状态响应
+
+    /////////////////////////// 群聊消息相关(3000-3999) /////////////////////
+    SEND_GROUP_MSG = 3000; // 发送消息
+    SEND_GROUP_MSG_RESPONSE = 3001; // 发送消息响应
+
+    SYNC_GROUP_MSG = 3002; // 消息多端同步
+
+    PULL_GROUP_MSG = 3004; // 主动拉取更久远消息
+    PULL_GROUP_MSG_RESPONSE = 3005; // 拉取更久远消息响应
+
+    OPERATE_GROUP_MSG = 3006; // 回执、删除、撤回消息
+    OPERATE_GROUP_MSG_RESPONSE = 3007; // 回执、删除、撤回消息响应
+
+    SYNC_OPERATE_GROUP_MSG = 3008;  // 同步回执、删除、撤回消息
+
+    PULL_GROUP_MSG_FORWARD = 3014; // 主动拉取更新消息（搜索消息查看上下文时需要）
+    PULL_GROUP_MSG_FORWARD_RESPONSE = 3015; // 拉取更新消息响应
+
+    SYNC_GROUP_MSG_READ_UNREAD_COUNT = 3022;  // 同步群消息已读未读数
+
+    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS = 3023;  // 查询群消息已读未读列表
+    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_RESPONSE = 3024; // 查询群消息已读未读列表响应
+
+    QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT = 3025;  // 查询群消息已读未读个数
+    QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT_RESPONSE = 3026; // 查询群消息已读未读个数响应
+
+    QUERY_MULTI_GROUP_MSG_LISTEN_STATUS = 3027; // 批量查询群聊语音消息是否已听
+    QUERY_MULTI_GROUP_MSG_LISTEN_STATUS_RESPONSE = 3028; // 批量查询群聊语音消息是否已听响应
+
+    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE = 3029;   // 分页查询群消息已读未读列表
+    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE_RESPONSE = 3030; // 分页查询群消息已读未读列表响应
+}
+
 // 消息类型
 enum ChatType {
 

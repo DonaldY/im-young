@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "enums.proto";
+
+option java_multiple_files = true;
+option java_package = "com.donald.proto";
+
+// 请求: 客户端 -> 服务端
+message Request {
+
+    // 行为类别: 是哪个解析结果
+    ActionType action = 1;
+
+    // 根据 action 进行解析
+    google.protobuf.Any data = 2;
+}
+
+// 响应: 服务端 -> 客户端
+message Response {
+    // 处理结果码: 0表示成功
+    int32 code = 1;
+
+    // 行为类别: 是哪个解析结果
+    ActionType action = 2;
+
+    // 根据 action 进行解析
+    google.protobuf.Any data = 3;
+}

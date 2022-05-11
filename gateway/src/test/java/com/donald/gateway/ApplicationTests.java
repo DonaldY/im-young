@@ -1,10 +1,10 @@
-package com.donald.gatewaytcp;
+package com.donald.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GatewayTcpApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {

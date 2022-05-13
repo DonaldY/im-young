@@ -3,6 +3,7 @@ syntax = "proto3";
 import "google/protobuf/any.proto";
 import "enums.proto";
 
+// option java_multiple_files = true;
 option java_package = "com.donald.proto";
 
 // 请求: 客户端 -> 服务端

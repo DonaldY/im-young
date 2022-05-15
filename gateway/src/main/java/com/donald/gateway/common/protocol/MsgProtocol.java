@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2022/05/14
  */
 @Data
-public class YoungProtocol<T> {
+public class MsgProtocol<T> {
 
     /**
      * 固定头部

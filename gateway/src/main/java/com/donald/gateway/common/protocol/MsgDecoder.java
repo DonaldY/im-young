@@ -10,7 +10,7 @@ import java.util.List;
  * @author donald
  * @date 2022/05/14
  */
-public final class YoungDecoder extends ByteToMessageDecoder {
+public final class MsgDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf byteBuf, List<Object> out) throws Exception {

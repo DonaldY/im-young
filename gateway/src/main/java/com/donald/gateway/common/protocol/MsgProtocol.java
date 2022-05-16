@@ -13,7 +13,7 @@ public class MsgProtocol<T> {
     /**
      * 固定头部
      */
-    private MsgHeader msgHeader;
+    private FixedHeader fixedHeader;
     /**
      * 消息体
      */

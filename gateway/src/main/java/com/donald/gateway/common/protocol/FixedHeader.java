@@ -1,11 +1,16 @@
 package com.donald.gateway.common.protocol;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 /**
  * @author donald
  * @date 2022/05/14
  */
-public class MsgHeader {
+@Data
+@AllArgsConstructor
+public class FixedHeader {
 
     /**
      +-------------------------------+
@@ -16,7 +21,7 @@ public class MsgHeader {
      | 延续位 1bit | 数据体字节个数 7bit|
      +-------------------------------+
      */
-    private short magic;   // 魔数
-    private short version; // 协议版本
-    private int len;       // 数据长度
+    private final int magic;        // 魔数
+    private final int version;      // 协议版本
+    private final int remainingLen; // 剩余长度
 }

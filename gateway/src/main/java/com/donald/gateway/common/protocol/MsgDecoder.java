@@ -105,6 +105,15 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
         return new Result<>(b, bytesRemainingInVariablePart);
     }
 
+    /**
+     +-------------------------------+
+     | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+     +-------------------------------+
+     | 魔数 4bit      | 版本 4bit     |
+     +-------------------------------+
+     | 延续位 1bit | 数据体字节个数 7bit|
+     +-------------------------------+
+     */
     private static FixedHeader decodeFixedHeader(ByteBuf buffer) {
 
         // 读取未分配 1字节

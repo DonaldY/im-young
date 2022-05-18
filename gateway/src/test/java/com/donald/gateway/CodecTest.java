@@ -3,24 +3,28 @@ package com.donald.gateway;
 import com.donald.gateway.common.Constants;
 import com.donald.gateway.common.protocol.FixedHeader;
 import com.donald.gateway.common.protocol.Message;
+import com.donald.gateway.common.protocol.MsgDecoder;
+import com.donald.gateway.common.protocol.MsgEncoder;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.UnpooledByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -41,14 +45,14 @@ public class CodecTest {
     @Mock
     private final Channel channel = mock(Channel.class);
 
-    private final MqttDecoder mqttDecoder = new MqttDecoder();
+    private final MsgDecoder decoder = new MsgDecoder();
 
     private final List<Object> out = new ArrayList<Object>();
 
     /**
      * MsgDecoder with an unrealistic max payload size of 1 byte.
      */
-    private final MqttDecoder mqttDecoderLimitedMessageSize = new MqttDecoder(1);
+    private final MsgDecoder decoderLimitedMessageSize = new MsgDecoder(1);
 
     @BeforeEach
     public void setup() {
@@ -69,9 +73,36 @@ public class CodecTest {
         out.clear();
     }
 
+    @RepeatedTest(1)
+    public void testMessage() throws Exception {
+
+        final Message message = createMessage();
+
+        ByteBuf byteBuf = MsgEncoder.doEncode(ctx, message);
+
+        decoder.channelRead(ctx, byteBuf);
+
+        assertEquals(1, out.size());
+
+        final Message decodedMessage = (Message) out.get(0);
+
+        validateFixedHeaders(message.getFixedHeader(), decodedMessage.getFixedHeader());
+        validatePayload(message.getPayload(), decodedMessage.getPayload());
+    }
+
     @Test
     public void testMessageForTooLarge() {
 
+    }
+
+    private static void validatePayload(ByteBuf expected, ByteBuf actual) {
+
+        assertEquals(0, expected.compareTo(actual));
+    }
+
+    private static void validateFixedHeaders(FixedHeader expected, FixedHeader actual) {
+        assertEquals(expected.getMagic(), actual.getMagic());
+        assertEquals(expected.getVersion(), actual.getVersion());
     }
 
     private static Message createMessage() {

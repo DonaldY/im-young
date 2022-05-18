@@ -1,5 +1,6 @@
 package com.donald.gateway.common.protocol;
 
+import io.netty.buffer.ByteBuf;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,5 +14,5 @@ public class Message {
 
     private final FixedHeader fixedHeader;
 
-    private final Object payload;
+    private final ByteBuf payload;
 }

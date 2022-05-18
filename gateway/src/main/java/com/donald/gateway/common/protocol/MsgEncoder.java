@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2022/05/18
  */
 @ChannelHandler.Sharable
-public class MsgEncoder extends MessageToMessageEncoder<MsgProtocol<ByteBuf>> {
+public class MsgEncoder extends MessageToMessageEncoder<Message> {
 
     /**
      +-------------------------------+
@@ -24,9 +24,15 @@ public class MsgEncoder extends MessageToMessageEncoder<MsgProtocol<ByteBuf>> {
      +-------------------------------+
      */
     @Override
-    protected void encode(ChannelHandlerContext ctx, MsgProtocol<ByteBuf> msg, List<Object> out) {
+    protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> out) {
+
+        out.add(doEncode(ctx, msg));
+    }
+
+    public static ByteBuf doEncode(ChannelHandlerContext ctx, Message msg) {
+
         FixedHeader header = msg.getFixedHeader();
-        ByteBuf payload = msg.getBody();
+        ByteBuf payload = msg.getPayload();
 
         int payloadBufferSize = payload.readableBytes();
         int fixedHeaderBufferSize = 1 + getVariableLengthInt(payloadBufferSize);
@@ -34,7 +40,7 @@ public class MsgEncoder extends MessageToMessageEncoder<MsgProtocol<ByteBuf>> {
         buf.writeByte(getFixedHeaderByte1(header));
         buf.writeBytes(payload);
 
-        out.add(buf);
+        return buf;
     }
 
     private static int getFixedHeaderByte1(FixedHeader header) {

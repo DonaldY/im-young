@@ -65,7 +65,7 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
 
             case READ_PAYLOAD: try {
 
-                final Result<?> decodedPayload = decodePublishPayload(buffer, bytesRemainingInVariablePart);
+                final Result<ByteBuf> decodedPayload = decodePublishPayload(buffer, bytesRemainingInVariablePart);
 
                 bytesRemainingInVariablePart -= decodedPayload.numberOfBytesConsumed;
 

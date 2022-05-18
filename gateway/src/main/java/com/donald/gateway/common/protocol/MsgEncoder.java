@@ -14,6 +14,15 @@ import java.util.List;
 @ChannelHandler.Sharable
 public class MsgEncoder extends MessageToMessageEncoder<MsgProtocol<ByteBuf>> {
 
+    /**
+     +-------------------------------+
+     | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+     +-------------------------------+
+     | 魔数 4bit      | 版本 4bit     |
+     +-------------------------------+
+     | 延续位 1bit | 数据体字节个数 7bit|
+     +-------------------------------+
+     */
     @Override
     protected void encode(ChannelHandlerContext ctx, MsgProtocol<ByteBuf> msg, List<Object> out) {
         FixedHeader header = msg.getFixedHeader();

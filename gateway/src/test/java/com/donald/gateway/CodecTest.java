@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -108,8 +109,27 @@ public class CodecTest {
     }
 
     @Test
-    public void testMessageForTooLarge() {
+    public void testMessageForTooLarge() throws Exception {
 
+        final Message message = createMessage();
+
+        ByteBuf byteBuf = MsgEncoder.doEncode(ctx, message);
+
+        // TODO: 异常，不报错
+        decoderLimitedMessageSize.channelRead(ctx, byteBuf);
+
+        assertEquals(1, out.size());
+
+        assertEquals(0, byteBuf.readableBytes());
+
+        final Message decodedMessage = (Message) out.get(0);
+
+        validateFixedHeaders(message.getFixedHeader(), decodedMessage.getFixedHeader());
+        validateDecoderExceptionTooLargeMessage(decodedMessage);
+    }
+
+    private static void validateDecoderExceptionTooLargeMessage(Message message) {
+        assertNull(message.getPayload());
     }
 
     private static void validatePayload(ByteBuf expected, ByteBuf actual) {

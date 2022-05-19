@@ -65,7 +65,7 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
 
             case READ_PAYLOAD: try {
 
-                final Result<ByteBuf> decodedPayload = decodePublishPayload(buffer, bytesRemainingInVariablePart);
+                final Result<ByteBuf> decodedPayload = decodePayload(buffer, bytesRemainingInVariablePart);
 
                 bytesRemainingInVariablePart -= decodedPayload.numberOfBytesConsumed;
 
@@ -98,7 +98,7 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
         }
     }
 
-    private static Result<ByteBuf> decodePublishPayload(ByteBuf buffer, int bytesRemainingInVariablePart) {
+    private static Result<ByteBuf> decodePayload(ByteBuf buffer, int bytesRemainingInVariablePart) {
 
         ByteBuf b = buffer.readRetainedSlice(bytesRemainingInVariablePart);
 

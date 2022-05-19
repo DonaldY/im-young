@@ -73,7 +73,7 @@ public class CodecTest {
         out.clear();
     }
 
-    @RepeatedTest(1)
+    @Test
     public void testMessage() throws Exception {
 
         final Message message = createMessage();

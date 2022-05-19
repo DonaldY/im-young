@@ -32,12 +32,14 @@ public class MsgEncoder extends MessageToMessageEncoder<Message> {
     public static ByteBuf doEncode(ChannelHandlerContext ctx, Message msg) {
 
         FixedHeader header = msg.getFixedHeader();
-        ByteBuf payload = msg.getPayload();
+        ByteBuf payload = msg.getPayload().duplicate();
 
         int payloadBufferSize = payload.readableBytes();
         int fixedHeaderBufferSize = 1 + getVariableLengthInt(payloadBufferSize);
         ByteBuf buf = ctx.alloc().buffer(fixedHeaderBufferSize + payloadBufferSize);
+
         buf.writeByte(getFixedHeaderByte1(header));
+        writeVariableLengthInt(buf, payloadBufferSize);
         buf.writeBytes(payload);
 
         return buf;
@@ -49,6 +51,17 @@ public class MsgEncoder extends MessageToMessageEncoder<Message> {
         ret |= header.getVersion();
 
         return ret;
+    }
+
+    private static void writeVariableLengthInt(ByteBuf buf, int num) {
+        do {
+            int digit = num % 128;
+            num /= 128;
+            if (num > 0) {
+                digit |= 0x80;
+            }
+            buf.writeByte(digit);
+        } while (num > 0);
     }
 
     private static int getVariableLengthInt(int num) {

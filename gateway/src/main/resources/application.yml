@@ -1,0 +1,23 @@
+server:
+  port: 8098
+spring:
+  profiles:
+    active: dev
+  main:
+    banner-mode: "off"
+    allow-bean-definition-overriding: true
+  application:
+    name: gateway
+im:
+  protocol: tcp
+  serverId: gateway
+  port: 9470
+  heartbeat:
+    heartbeatInterval: 5000
+    readTimeout: 30000
+  zk:
+    enable: true
+    retry: 3
+    intervalTime: 1000
+    zkServer: 192.168.50.210:2181
+  routeServers:

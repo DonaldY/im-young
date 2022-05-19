@@ -14,11 +14,9 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
@@ -71,6 +69,25 @@ public class CodecTest {
             ReferenceCountUtil.release(o);
         }
         out.clear();
+    }
+
+    @Test
+    public void testPingReqMessage() throws Exception {
+
+        final Message message = createMessage();
+
+        testMessageWithOnlyFixedHeader(message);
+    }
+
+    private void testMessageWithOnlyFixedHeader(Message message) throws Exception {
+        ByteBuf byteBuf = MsgEncoder.doEncode(ctx, message);
+
+        decoder.channelRead(ctx, byteBuf);
+
+        assertEquals(1, out.size());
+
+        final Message decodedMessage = (Message) out.get(0);
+        validateFixedHeaders(message.getFixedHeader(), decodedMessage.getFixedHeader());
     }
 
     @Test

@@ -39,7 +39,6 @@ public class TcpServerHandler extends SimpleChannelInboundHandler {
 
         log.info("客户端连接断开");
 
-        //offline(ctx);
     }
 
     @Override

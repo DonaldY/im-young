@@ -1,6 +1,7 @@
 package com.donald.gateway.server;
 
 import com.donald.gateway.config.BaseConfig;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -30,6 +31,9 @@ public class TcpServerHandler extends SimpleChannelInboundHandler {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
         log.info("客户端连接已建立");
+
+        // 使用之前定义好的。
+        // ByteBuf buf = ctx.alloc().buffer();
 
         super.channelActive(ctx);
     }

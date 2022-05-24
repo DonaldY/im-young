@@ -1,6 +1,7 @@
 package com.donald.gateway.server;
 
 import com.donald.gateway.config.BaseConfig;
+import com.donald.proto.Base.Request;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -22,7 +23,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @ChannelHandler.Sharable
-public class TcpServerHandler extends SimpleChannelInboundHandler {
+public class TcpServerHandler extends SimpleChannelInboundHandler<Request> {
 
     private final ClientManager clientManager;
     private final BaseConfig baseConfig;
@@ -46,7 +47,8 @@ public class TcpServerHandler extends SimpleChannelInboundHandler {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, Request request) {
+
 
     }
 
@@ -60,7 +62,6 @@ public class TcpServerHandler extends SimpleChannelInboundHandler {
             if (idleStateEvent.state() == IdleState.READER_IDLE) {
 
                 SocketChannel clientChannel = (SocketChannel) ctx.channel();
-
                 Optional<ClientManager.ClientInstance> optional = clientManager.getClientId(clientChannel);
 
                 optional.ifPresent(clientInstance -> log.info("心跳超时:{}", clientInstance.clientId()));

@@ -233,7 +233,7 @@ public final class Base {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (action_ != com.donald.proto.Enums.ActionType.CONNECT.getNumber()) {
+      if (action_ != com.donald.proto.Enums.ActionType.DEFAULT.getNumber()) {
         output.writeEnum(1, action_);
       }
       if (data_ != null) {
@@ -248,7 +248,7 @@ public final class Base {
       if (size != -1) return size;
 
       size = 0;
-      if (action_ != com.donald.proto.Enums.ActionType.CONNECT.getNumber()) {
+      if (action_ != com.donald.proto.Enums.ActionType.DEFAULT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, action_);
       }
@@ -1073,7 +1073,7 @@ public final class Base {
       if (code_ != 0) {
         output.writeInt32(1, code_);
       }
-      if (action_ != com.donald.proto.Enums.ActionType.CONNECT.getNumber()) {
+      if (action_ != com.donald.proto.Enums.ActionType.DEFAULT.getNumber()) {
         output.writeEnum(2, action_);
       }
       if (data_ != null) {
@@ -1092,7 +1092,7 @@ public final class Base {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, code_);
       }
-      if (action_ != com.donald.proto.Enums.ActionType.CONNECT.getNumber()) {
+      if (action_ != com.donald.proto.Enums.ActionType.DEFAULT.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, action_);
       }

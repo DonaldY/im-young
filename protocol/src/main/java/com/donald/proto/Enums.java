@@ -21,12 +21,20 @@ public final class Enums {
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <pre>
+     * 默认
+     * </pre>
+     *
+     * <code>DEFAULT = 0;</code>
+     */
+    DEFAULT(0),
+    /**
+     * <pre>
      * 连接
      * </pre>
      *
-     * <code>CONNECT = 0;</code>
+     * <code>CONNECT = 1;</code>
      */
-    CONNECT(0),
+    CONNECT(1),
     /**
      * <pre>
      *&#47;//////////////////////// 单聊消息 /////////////////////
@@ -51,313 +59,25 @@ public final class Enums {
      * <code>SYNC_C2C_MSG = 258;</code>
      */
     SYNC_C2C_MSG(258),
-    /**
-     * <pre>
-     * 主动拉取更久远消息
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG = 2004;</code>
-     */
-    PULL_C2C_MSG(2004),
-    /**
-     * <pre>
-     * 拉取更久远消息响应
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG_RESPONSE = 2005;</code>
-     */
-    PULL_C2C_MSG_RESPONSE(2005),
-    /**
-     * <pre>
-     * 回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>OPERATE_C2C_MSG = 2006;</code>
-     */
-    OPERATE_C2C_MSG(2006),
-    /**
-     * <pre>
-     * 回执、删除、撤回消息响应
-     * </pre>
-     *
-     * <code>OPERATE_C2C_MSG_RESPONSE = 2007;</code>
-     */
-    OPERATE_C2C_MSG_RESPONSE(2007),
-    /**
-     * <pre>
-     * 同步回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>SYNC_OPERATE_C2C_MSG = 2008;</code>
-     */
-    SYNC_OPERATE_C2C_MSG(2008),
-    /**
-     * <pre>
-     * 合并转发消息
-     * </pre>
-     *
-     * <code>COMBINE_FORWARD_MSG = 2009;</code>
-     */
-    COMBINE_FORWARD_MSG(2009),
-    /**
-     * <pre>
-     * 合并转发消息响应
-     * </pre>
-     *
-     * <code>COMBINE_FORWARD_MSG_RESPONSE = 2010;</code>
-     */
-    COMBINE_FORWARD_MSG_RESPONSE(2010),
-    /**
-     * <pre>
-     * 主动拉取更新消息（搜索消息查看上下文时需要）
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG_FORWARD = 2013;</code>
-     */
-    PULL_C2C_MSG_FORWARD(2013),
-    /**
-     * <pre>
-     * 拉取更新消息响应
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG_FORWARD_RESPONSE = 2014;</code>
-     */
-    PULL_C2C_MSG_FORWARD_RESPONSE(2014),
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已读
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_READ_UNREAD = 2015;</code>
-     */
-    QUERY_MULTI_C2C_MSG_READ_UNREAD(2015),
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已读响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_READ_UNREAD_RESPONSE = 2016;</code>
-     */
-    QUERY_MULTI_C2C_MSG_READ_UNREAD_RESPONSE(2016),
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已听
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_LISTEN_STATUS = 2017;</code>
-     */
-    QUERY_MULTI_C2C_MSG_LISTEN_STATUS(2017),
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已听响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_LISTEN_STATUS_RESPONSE = 2018;</code>
-     */
-    QUERY_MULTI_C2C_MSG_LISTEN_STATUS_RESPONSE(2018),
-    /**
-     * <pre>
-     * 通知对方自己正在输入
-     * </pre>
-     *
-     * <code>NOTIFY_INPUTTING = 2019;</code>
-     */
-    NOTIFY_INPUTTING(2019),
-    /**
-     * <pre>
-     * 通知对方自己正在输入响应
-     * </pre>
-     *
-     * <code>NOTIFY_INPUTTING_RESPONSE = 2020;</code>
-     */
-    NOTIFY_INPUTTING_RESPONSE(2020),
-    /**
-     * <pre>
-     * 对方正在输入同步
-     * </pre>
-     *
-     * <code>SYNC_INPUTTING_NOTIFY = 2021;</code>
-     */
-    SYNC_INPUTTING_NOTIFY(2021),
-    /**
-     * <pre>
-     * 查询对方在线状态
-     * </pre>
-     *
-     * <code>QUERY_ONLINE_STATUS = 2022;</code>
-     */
-    QUERY_ONLINE_STATUS(2022),
-    /**
-     * <pre>
-     * 查询对方在线状态响应
-     * </pre>
-     *
-     * <code>QUERY_ONLINE_STATUS_RESPONSE = 2023;</code>
-     */
-    QUERY_ONLINE_STATUS_RESPONSE(2023),
-    /**
-     * <pre>
-     *&#47;//////////////////////// 群聊消息相关(3000-3999) /////////////////////
-     * </pre>
-     *
-     * <code>SEND_GROUP_MSG = 3000;</code>
-     */
-    SEND_GROUP_MSG(3000),
-    /**
-     * <pre>
-     * 发送消息响应
-     * </pre>
-     *
-     * <code>SEND_GROUP_MSG_RESPONSE = 3001;</code>
-     */
-    SEND_GROUP_MSG_RESPONSE(3001),
-    /**
-     * <pre>
-     * 消息多端同步
-     * </pre>
-     *
-     * <code>SYNC_GROUP_MSG = 3002;</code>
-     */
-    SYNC_GROUP_MSG(3002),
-    /**
-     * <pre>
-     * 主动拉取更久远消息
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG = 3004;</code>
-     */
-    PULL_GROUP_MSG(3004),
-    /**
-     * <pre>
-     * 拉取更久远消息响应
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG_RESPONSE = 3005;</code>
-     */
-    PULL_GROUP_MSG_RESPONSE(3005),
-    /**
-     * <pre>
-     * 回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>OPERATE_GROUP_MSG = 3006;</code>
-     */
-    OPERATE_GROUP_MSG(3006),
-    /**
-     * <pre>
-     * 回执、删除、撤回消息响应
-     * </pre>
-     *
-     * <code>OPERATE_GROUP_MSG_RESPONSE = 3007;</code>
-     */
-    OPERATE_GROUP_MSG_RESPONSE(3007),
-    /**
-     * <pre>
-     * 同步回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>SYNC_OPERATE_GROUP_MSG = 3008;</code>
-     */
-    SYNC_OPERATE_GROUP_MSG(3008),
-    /**
-     * <pre>
-     * 主动拉取更新消息（搜索消息查看上下文时需要）
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG_FORWARD = 3014;</code>
-     */
-    PULL_GROUP_MSG_FORWARD(3014),
-    /**
-     * <pre>
-     * 拉取更新消息响应
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG_FORWARD_RESPONSE = 3015;</code>
-     */
-    PULL_GROUP_MSG_FORWARD_RESPONSE(3015),
-    /**
-     * <pre>
-     * 同步群消息已读未读数
-     * </pre>
-     *
-     * <code>SYNC_GROUP_MSG_READ_UNREAD_COUNT = 3022;</code>
-     */
-    SYNC_GROUP_MSG_READ_UNREAD_COUNT(3022),
-    /**
-     * <pre>
-     * 查询群消息已读未读列表
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS = 3023;</code>
-     */
-    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS(3023),
-    /**
-     * <pre>
-     * 查询群消息已读未读列表响应
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_RESPONSE = 3024;</code>
-     */
-    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_RESPONSE(3024),
-    /**
-     * <pre>
-     * 查询群消息已读未读个数
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT = 3025;</code>
-     */
-    QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT(3025),
-    /**
-     * <pre>
-     * 查询群消息已读未读个数响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT_RESPONSE = 3026;</code>
-     */
-    QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT_RESPONSE(3026),
-    /**
-     * <pre>
-     * 批量查询群聊语音消息是否已听
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_LISTEN_STATUS = 3027;</code>
-     */
-    QUERY_MULTI_GROUP_MSG_LISTEN_STATUS(3027),
-    /**
-     * <pre>
-     * 批量查询群聊语音消息是否已听响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_LISTEN_STATUS_RESPONSE = 3028;</code>
-     */
-    QUERY_MULTI_GROUP_MSG_LISTEN_STATUS_RESPONSE(3028),
-    /**
-     * <pre>
-     * 分页查询群消息已读未读列表
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE = 3029;</code>
-     */
-    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE(3029),
-    /**
-     * <pre>
-     * 分页查询群消息已读未读列表响应
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE_RESPONSE = 3030;</code>
-     */
-    QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE_RESPONSE(3030),
     UNRECOGNIZED(-1),
     ;
 
     /**
      * <pre>
+     * 默认
+     * </pre>
+     *
+     * <code>DEFAULT = 0;</code>
+     */
+    public static final int DEFAULT_VALUE = 0;
+    /**
+     * <pre>
      * 连接
      * </pre>
      *
-     * <code>CONNECT = 0;</code>
+     * <code>CONNECT = 1;</code>
      */
-    public static final int CONNECT_VALUE = 0;
+    public static final int CONNECT_VALUE = 1;
     /**
      * <pre>
      *&#47;//////////////////////// 单聊消息 /////////////////////
@@ -382,302 +102,6 @@ public final class Enums {
      * <code>SYNC_C2C_MSG = 258;</code>
      */
     public static final int SYNC_C2C_MSG_VALUE = 258;
-    /**
-     * <pre>
-     * 主动拉取更久远消息
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG = 2004;</code>
-     */
-    public static final int PULL_C2C_MSG_VALUE = 2004;
-    /**
-     * <pre>
-     * 拉取更久远消息响应
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG_RESPONSE = 2005;</code>
-     */
-    public static final int PULL_C2C_MSG_RESPONSE_VALUE = 2005;
-    /**
-     * <pre>
-     * 回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>OPERATE_C2C_MSG = 2006;</code>
-     */
-    public static final int OPERATE_C2C_MSG_VALUE = 2006;
-    /**
-     * <pre>
-     * 回执、删除、撤回消息响应
-     * </pre>
-     *
-     * <code>OPERATE_C2C_MSG_RESPONSE = 2007;</code>
-     */
-    public static final int OPERATE_C2C_MSG_RESPONSE_VALUE = 2007;
-    /**
-     * <pre>
-     * 同步回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>SYNC_OPERATE_C2C_MSG = 2008;</code>
-     */
-    public static final int SYNC_OPERATE_C2C_MSG_VALUE = 2008;
-    /**
-     * <pre>
-     * 合并转发消息
-     * </pre>
-     *
-     * <code>COMBINE_FORWARD_MSG = 2009;</code>
-     */
-    public static final int COMBINE_FORWARD_MSG_VALUE = 2009;
-    /**
-     * <pre>
-     * 合并转发消息响应
-     * </pre>
-     *
-     * <code>COMBINE_FORWARD_MSG_RESPONSE = 2010;</code>
-     */
-    public static final int COMBINE_FORWARD_MSG_RESPONSE_VALUE = 2010;
-    /**
-     * <pre>
-     * 主动拉取更新消息（搜索消息查看上下文时需要）
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG_FORWARD = 2013;</code>
-     */
-    public static final int PULL_C2C_MSG_FORWARD_VALUE = 2013;
-    /**
-     * <pre>
-     * 拉取更新消息响应
-     * </pre>
-     *
-     * <code>PULL_C2C_MSG_FORWARD_RESPONSE = 2014;</code>
-     */
-    public static final int PULL_C2C_MSG_FORWARD_RESPONSE_VALUE = 2014;
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已读
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_READ_UNREAD = 2015;</code>
-     */
-    public static final int QUERY_MULTI_C2C_MSG_READ_UNREAD_VALUE = 2015;
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已读响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_READ_UNREAD_RESPONSE = 2016;</code>
-     */
-    public static final int QUERY_MULTI_C2C_MSG_READ_UNREAD_RESPONSE_VALUE = 2016;
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已听
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_LISTEN_STATUS = 2017;</code>
-     */
-    public static final int QUERY_MULTI_C2C_MSG_LISTEN_STATUS_VALUE = 2017;
-    /**
-     * <pre>
-     * 批量查询单聊消息是否已听响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_C2C_MSG_LISTEN_STATUS_RESPONSE = 2018;</code>
-     */
-    public static final int QUERY_MULTI_C2C_MSG_LISTEN_STATUS_RESPONSE_VALUE = 2018;
-    /**
-     * <pre>
-     * 通知对方自己正在输入
-     * </pre>
-     *
-     * <code>NOTIFY_INPUTTING = 2019;</code>
-     */
-    public static final int NOTIFY_INPUTTING_VALUE = 2019;
-    /**
-     * <pre>
-     * 通知对方自己正在输入响应
-     * </pre>
-     *
-     * <code>NOTIFY_INPUTTING_RESPONSE = 2020;</code>
-     */
-    public static final int NOTIFY_INPUTTING_RESPONSE_VALUE = 2020;
-    /**
-     * <pre>
-     * 对方正在输入同步
-     * </pre>
-     *
-     * <code>SYNC_INPUTTING_NOTIFY = 2021;</code>
-     */
-    public static final int SYNC_INPUTTING_NOTIFY_VALUE = 2021;
-    /**
-     * <pre>
-     * 查询对方在线状态
-     * </pre>
-     *
-     * <code>QUERY_ONLINE_STATUS = 2022;</code>
-     */
-    public static final int QUERY_ONLINE_STATUS_VALUE = 2022;
-    /**
-     * <pre>
-     * 查询对方在线状态响应
-     * </pre>
-     *
-     * <code>QUERY_ONLINE_STATUS_RESPONSE = 2023;</code>
-     */
-    public static final int QUERY_ONLINE_STATUS_RESPONSE_VALUE = 2023;
-    /**
-     * <pre>
-     *&#47;//////////////////////// 群聊消息相关(3000-3999) /////////////////////
-     * </pre>
-     *
-     * <code>SEND_GROUP_MSG = 3000;</code>
-     */
-    public static final int SEND_GROUP_MSG_VALUE = 3000;
-    /**
-     * <pre>
-     * 发送消息响应
-     * </pre>
-     *
-     * <code>SEND_GROUP_MSG_RESPONSE = 3001;</code>
-     */
-    public static final int SEND_GROUP_MSG_RESPONSE_VALUE = 3001;
-    /**
-     * <pre>
-     * 消息多端同步
-     * </pre>
-     *
-     * <code>SYNC_GROUP_MSG = 3002;</code>
-     */
-    public static final int SYNC_GROUP_MSG_VALUE = 3002;
-    /**
-     * <pre>
-     * 主动拉取更久远消息
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG = 3004;</code>
-     */
-    public static final int PULL_GROUP_MSG_VALUE = 3004;
-    /**
-     * <pre>
-     * 拉取更久远消息响应
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG_RESPONSE = 3005;</code>
-     */
-    public static final int PULL_GROUP_MSG_RESPONSE_VALUE = 3005;
-    /**
-     * <pre>
-     * 回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>OPERATE_GROUP_MSG = 3006;</code>
-     */
-    public static final int OPERATE_GROUP_MSG_VALUE = 3006;
-    /**
-     * <pre>
-     * 回执、删除、撤回消息响应
-     * </pre>
-     *
-     * <code>OPERATE_GROUP_MSG_RESPONSE = 3007;</code>
-     */
-    public static final int OPERATE_GROUP_MSG_RESPONSE_VALUE = 3007;
-    /**
-     * <pre>
-     * 同步回执、删除、撤回消息
-     * </pre>
-     *
-     * <code>SYNC_OPERATE_GROUP_MSG = 3008;</code>
-     */
-    public static final int SYNC_OPERATE_GROUP_MSG_VALUE = 3008;
-    /**
-     * <pre>
-     * 主动拉取更新消息（搜索消息查看上下文时需要）
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG_FORWARD = 3014;</code>
-     */
-    public static final int PULL_GROUP_MSG_FORWARD_VALUE = 3014;
-    /**
-     * <pre>
-     * 拉取更新消息响应
-     * </pre>
-     *
-     * <code>PULL_GROUP_MSG_FORWARD_RESPONSE = 3015;</code>
-     */
-    public static final int PULL_GROUP_MSG_FORWARD_RESPONSE_VALUE = 3015;
-    /**
-     * <pre>
-     * 同步群消息已读未读数
-     * </pre>
-     *
-     * <code>SYNC_GROUP_MSG_READ_UNREAD_COUNT = 3022;</code>
-     */
-    public static final int SYNC_GROUP_MSG_READ_UNREAD_COUNT_VALUE = 3022;
-    /**
-     * <pre>
-     * 查询群消息已读未读列表
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS = 3023;</code>
-     */
-    public static final int QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_VALUE = 3023;
-    /**
-     * <pre>
-     * 查询群消息已读未读列表响应
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_RESPONSE = 3024;</code>
-     */
-    public static final int QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_RESPONSE_VALUE = 3024;
-    /**
-     * <pre>
-     * 查询群消息已读未读个数
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT = 3025;</code>
-     */
-    public static final int QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT_VALUE = 3025;
-    /**
-     * <pre>
-     * 查询群消息已读未读个数响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT_RESPONSE = 3026;</code>
-     */
-    public static final int QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT_RESPONSE_VALUE = 3026;
-    /**
-     * <pre>
-     * 批量查询群聊语音消息是否已听
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_LISTEN_STATUS = 3027;</code>
-     */
-    public static final int QUERY_MULTI_GROUP_MSG_LISTEN_STATUS_VALUE = 3027;
-    /**
-     * <pre>
-     * 批量查询群聊语音消息是否已听响应
-     * </pre>
-     *
-     * <code>QUERY_MULTI_GROUP_MSG_LISTEN_STATUS_RESPONSE = 3028;</code>
-     */
-    public static final int QUERY_MULTI_GROUP_MSG_LISTEN_STATUS_RESPONSE_VALUE = 3028;
-    /**
-     * <pre>
-     * 分页查询群消息已读未读列表
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE = 3029;</code>
-     */
-    public static final int QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE_VALUE = 3029;
-    /**
-     * <pre>
-     * 分页查询群消息已读未读列表响应
-     * </pre>
-     *
-     * <code>QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE_RESPONSE = 3030;</code>
-     */
-    public static final int QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE_RESPONSE_VALUE = 3030;
 
 
     public final int getNumber() {
@@ -698,47 +122,11 @@ public final class Enums {
 
     public static ActionType forNumber(int value) {
       switch (value) {
-        case 0: return CONNECT;
+        case 0: return DEFAULT;
+        case 1: return CONNECT;
         case 256: return SEND_C2C_MSG;
         case 257: return SEND_C2C_MSG_RESPONSE;
         case 258: return SYNC_C2C_MSG;
-        case 2004: return PULL_C2C_MSG;
-        case 2005: return PULL_C2C_MSG_RESPONSE;
-        case 2006: return OPERATE_C2C_MSG;
-        case 2007: return OPERATE_C2C_MSG_RESPONSE;
-        case 2008: return SYNC_OPERATE_C2C_MSG;
-        case 2009: return COMBINE_FORWARD_MSG;
-        case 2010: return COMBINE_FORWARD_MSG_RESPONSE;
-        case 2013: return PULL_C2C_MSG_FORWARD;
-        case 2014: return PULL_C2C_MSG_FORWARD_RESPONSE;
-        case 2015: return QUERY_MULTI_C2C_MSG_READ_UNREAD;
-        case 2016: return QUERY_MULTI_C2C_MSG_READ_UNREAD_RESPONSE;
-        case 2017: return QUERY_MULTI_C2C_MSG_LISTEN_STATUS;
-        case 2018: return QUERY_MULTI_C2C_MSG_LISTEN_STATUS_RESPONSE;
-        case 2019: return NOTIFY_INPUTTING;
-        case 2020: return NOTIFY_INPUTTING_RESPONSE;
-        case 2021: return SYNC_INPUTTING_NOTIFY;
-        case 2022: return QUERY_ONLINE_STATUS;
-        case 2023: return QUERY_ONLINE_STATUS_RESPONSE;
-        case 3000: return SEND_GROUP_MSG;
-        case 3001: return SEND_GROUP_MSG_RESPONSE;
-        case 3002: return SYNC_GROUP_MSG;
-        case 3004: return PULL_GROUP_MSG;
-        case 3005: return PULL_GROUP_MSG_RESPONSE;
-        case 3006: return OPERATE_GROUP_MSG;
-        case 3007: return OPERATE_GROUP_MSG_RESPONSE;
-        case 3008: return SYNC_OPERATE_GROUP_MSG;
-        case 3014: return PULL_GROUP_MSG_FORWARD;
-        case 3015: return PULL_GROUP_MSG_FORWARD_RESPONSE;
-        case 3022: return SYNC_GROUP_MSG_READ_UNREAD_COUNT;
-        case 3023: return QUERY_GROUP_MSG_READ_UNREAD_MEMBERS;
-        case 3024: return QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_RESPONSE;
-        case 3025: return QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT;
-        case 3026: return QUERY_MULTI_GROUP_MSG_READ_UNREAD_COUNT_RESPONSE;
-        case 3027: return QUERY_MULTI_GROUP_MSG_LISTEN_STATUS;
-        case 3028: return QUERY_MULTI_GROUP_MSG_LISTEN_STATUS_RESPONSE;
-        case 3029: return QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE;
-        case 3030: return QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY_PAGE_RESPONSE;
         default: return null;
       }
     }
@@ -918,43 +306,11 @@ public final class Enums {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013enums.proto*\333\n\n\nActionType\022\013\n\007CONNECT\020" +
-      "\000\022\021\n\014SEND_C2C_MSG\020\200\002\022\032\n\025SEND_C2C_MSG_RES" +
-      "PONSE\020\201\002\022\021\n\014SYNC_C2C_MSG\020\202\002\022\021\n\014PULL_C2C_" +
-      "MSG\020\324\017\022\032\n\025PULL_C2C_MSG_RESPONSE\020\325\017\022\024\n\017OP" +
-      "ERATE_C2C_MSG\020\326\017\022\035\n\030OPERATE_C2C_MSG_RESP" +
-      "ONSE\020\327\017\022\031\n\024SYNC_OPERATE_C2C_MSG\020\330\017\022\030\n\023CO" +
-      "MBINE_FORWARD_MSG\020\331\017\022!\n\034COMBINE_FORWARD_" +
-      "MSG_RESPONSE\020\332\017\022\031\n\024PULL_C2C_MSG_FORWARD\020" +
-      "\335\017\022\"\n\035PULL_C2C_MSG_FORWARD_RESPONSE\020\336\017\022$" +
-      "\n\037QUERY_MULTI_C2C_MSG_READ_UNREAD\020\337\017\022-\n(" +
-      "QUERY_MULTI_C2C_MSG_READ_UNREAD_RESPONSE" +
-      "\020\340\017\022&\n!QUERY_MULTI_C2C_MSG_LISTEN_STATUS" +
-      "\020\341\017\022/\n*QUERY_MULTI_C2C_MSG_LISTEN_STATUS" +
-      "_RESPONSE\020\342\017\022\025\n\020NOTIFY_INPUTTING\020\343\017\022\036\n\031N" +
-      "OTIFY_INPUTTING_RESPONSE\020\344\017\022\032\n\025SYNC_INPU" +
-      "TTING_NOTIFY\020\345\017\022\030\n\023QUERY_ONLINE_STATUS\020\346" +
-      "\017\022!\n\034QUERY_ONLINE_STATUS_RESPONSE\020\347\017\022\023\n\016" +
-      "SEND_GROUP_MSG\020\270\027\022\034\n\027SEND_GROUP_MSG_RESP" +
-      "ONSE\020\271\027\022\023\n\016SYNC_GROUP_MSG\020\272\027\022\023\n\016PULL_GRO" +
-      "UP_MSG\020\274\027\022\034\n\027PULL_GROUP_MSG_RESPONSE\020\275\027\022" +
-      "\026\n\021OPERATE_GROUP_MSG\020\276\027\022\037\n\032OPERATE_GROUP" +
-      "_MSG_RESPONSE\020\277\027\022\033\n\026SYNC_OPERATE_GROUP_M" +
-      "SG\020\300\027\022\033\n\026PULL_GROUP_MSG_FORWARD\020\306\027\022$\n\037PU" +
-      "LL_GROUP_MSG_FORWARD_RESPONSE\020\307\027\022%\n SYNC" +
-      "_GROUP_MSG_READ_UNREAD_COUNT\020\316\027\022(\n#QUERY" +
-      "_GROUP_MSG_READ_UNREAD_MEMBERS\020\317\027\0221\n,QUE" +
-      "RY_GROUP_MSG_READ_UNREAD_MEMBERS_RESPONS" +
-      "E\020\320\027\022,\n\'QUERY_MULTI_GROUP_MSG_READ_UNREA" +
-      "D_COUNT\020\321\027\0225\n0QUERY_MULTI_GROUP_MSG_READ" +
-      "_UNREAD_COUNT_RESPONSE\020\322\027\022(\n#QUERY_MULTI" +
-      "_GROUP_MSG_LISTEN_STATUS\020\323\027\0221\n,QUERY_MUL" +
-      "TI_GROUP_MSG_LISTEN_STATUS_RESPONSE\020\324\027\0220" +
-      "\n+QUERY_GROUP_MSG_READ_UNREAD_MEMBERS_BY" +
-      "_PAGE\020\325\027\0229\n4QUERY_GROUP_MSG_READ_UNREAD_" +
-      "MEMBERS_BY_PAGE_RESPONSE\020\326\027*#\n\010ChatType\022" +
-      "\007\n\003C2C\020\000\022\016\n\nGROUP_CHAT\020\001B\022\n\020com.donald.p" +
-      "rotob\006proto3"
+      "\n\013enums.proto*h\n\nActionType\022\013\n\007DEFAULT\020\000" +
+      "\022\013\n\007CONNECT\020\001\022\021\n\014SEND_C2C_MSG\020\200\002\022\032\n\025SEND" +
+      "_C2C_MSG_RESPONSE\020\201\002\022\021\n\014SYNC_C2C_MSG\020\202\002*" +
+      "#\n\010ChatType\022\007\n\003C2C\020\000\022\016\n\nGROUP_CHAT\020\001B\022\n\020" +
+      "com.donald.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -15,8 +15,9 @@ import java.util.List;
 public class ActionHandlerFactory {
 
     private final List<ActionHandler> actionHandlers;
+    private final DefaultActionHandler defaultActionHandler;
 
-    public ActionHandler getActionHandler(ActionType type) throws Exception {
+    public ActionHandler getActionHandler(ActionType type) {
 
         for (ActionHandler actionHandler : actionHandlers) {
 
@@ -26,7 +27,6 @@ public class ActionHandlerFactory {
             }
         }
 
-        // TODO: 统一异常
-        throw new Exception();
+        return defaultActionHandler;
     }
 }

@@ -1,8 +1,10 @@
 package com.donald.gateway.server;
 
 import com.donald.gateway.config.BaseConfig;
+import com.donald.gateway.server.action.ActionHandler;
+import com.donald.gateway.server.action.ActionHandlerFactory;
 import com.donald.proto.Base.Request;
-import io.netty.buffer.ByteBuf;
+import com.donald.proto.Enums.ActionType;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -25,6 +27,7 @@ import java.util.Optional;
 @ChannelHandler.Sharable
 public class TcpServerHandler extends SimpleChannelInboundHandler<Request> {
 
+    private final ActionHandlerFactory actionHandlerFactory;
     private final ClientManager clientManager;
     private final BaseConfig baseConfig;
 
@@ -49,7 +52,11 @@ public class TcpServerHandler extends SimpleChannelInboundHandler<Request> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Request request) {
 
+        ActionType actionType = request.getAction();
 
+        ActionHandler actionHandler = actionHandlerFactory.getActionHandler(actionType);
+
+        actionHandler.handle(request, ctx);
     }
 
     @Override

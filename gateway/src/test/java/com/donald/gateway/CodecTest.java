@@ -5,6 +5,9 @@ import com.donald.gateway.common.protocol.FixedHeader;
 import com.donald.gateway.common.protocol.Message;
 import com.donald.gateway.common.protocol.MsgDecoder;
 import com.donald.gateway.common.protocol.MsgEncoder;
+import com.donald.proto.Base;
+import com.donald.proto.Enums;
+import com.google.protobuf.Any;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.UnpooledByteBufAllocator;
@@ -22,8 +25,7 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -132,9 +134,9 @@ public class CodecTest {
         assertNull(message.getPayload());
     }
 
-    private static void validatePayload(ByteBuf expected, ByteBuf actual) {
+    private static void validatePayload(Object expected, Object actual) {
 
-        assertEquals(0, expected.compareTo(actual));
+        assertEquals(expected, actual);
     }
 
     private static void validateFixedHeaders(FixedHeader expected, FixedHeader actual) {
@@ -146,9 +148,9 @@ public class CodecTest {
 
         FixedHeader fixedHeader = new FixedHeader(Constants.MAGIC, Constants.VERSION, 0);
 
-        ByteBuf payload = ALLOCATOR.buffer();
-        payload.writeBytes("whatever".getBytes(CharsetUtil.UTF_8));
+        Base.Request request = Base.Request.newBuilder().setAction(Enums.ActionType.CONNECT)
+                .build();
 
-        return new Message(fixedHeader, payload);
+        return new Message(fixedHeader, request);
     }
 }

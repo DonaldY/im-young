@@ -1,5 +1,6 @@
 package com.donald.gateway.common.protocol;
 
+import com.donald.proto.Base;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -32,15 +33,15 @@ public class MsgEncoder extends MessageToMessageEncoder<Message> {
     public static ByteBuf doEncode(ChannelHandlerContext ctx, Message msg) {
 
         FixedHeader header = msg.getFixedHeader();
-        ByteBuf payload = msg.getPayload().duplicate();
+        Base.Request payload = (Base.Request) msg.getPayload();
 
-        int payloadBufferSize = payload.readableBytes();
+        int payloadBufferSize = payload.toByteArray().length;
         int fixedHeaderBufferSize = 1 + getVariableLengthInt(payloadBufferSize);
         ByteBuf buf = ctx.alloc().buffer(fixedHeaderBufferSize + payloadBufferSize);
 
         buf.writeByte(getFixedHeaderByte1(header));
         writeVariableLengthInt(buf, payloadBufferSize);
-        buf.writeBytes(payload);
+        buf.writeBytes(payload.toByteArray());
 
         return buf;
     }

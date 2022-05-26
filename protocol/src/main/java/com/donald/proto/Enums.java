@@ -29,12 +29,20 @@ public final class Enums {
     DEFAULT(0),
     /**
      * <pre>
+     * 心跳
+     * </pre>
+     *
+     * <code>HEARTBEAT = 1;</code>
+     */
+    HEARTBEAT(1),
+    /**
+     * <pre>
      * 连接
      * </pre>
      *
-     * <code>CONNECT = 1;</code>
+     * <code>CONNECT = 2;</code>
      */
-    CONNECT(1),
+    CONNECT(2),
     /**
      * <pre>
      *&#47;//////////////////////// 单聊消息 /////////////////////
@@ -72,12 +80,20 @@ public final class Enums {
     public static final int DEFAULT_VALUE = 0;
     /**
      * <pre>
+     * 心跳
+     * </pre>
+     *
+     * <code>HEARTBEAT = 1;</code>
+     */
+    public static final int HEARTBEAT_VALUE = 1;
+    /**
+     * <pre>
      * 连接
      * </pre>
      *
-     * <code>CONNECT = 1;</code>
+     * <code>CONNECT = 2;</code>
      */
-    public static final int CONNECT_VALUE = 1;
+    public static final int CONNECT_VALUE = 2;
     /**
      * <pre>
      *&#47;//////////////////////// 单聊消息 /////////////////////
@@ -123,7 +139,8 @@ public final class Enums {
     public static ActionType forNumber(int value) {
       switch (value) {
         case 0: return DEFAULT;
-        case 1: return CONNECT;
+        case 1: return HEARTBEAT;
+        case 2: return CONNECT;
         case 256: return SEND_C2C_MSG;
         case 257: return SEND_C2C_MSG_RESPONSE;
         case 258: return SYNC_C2C_MSG;
@@ -306,11 +323,11 @@ public final class Enums {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013enums.proto*h\n\nActionType\022\013\n\007DEFAULT\020\000" +
-      "\022\013\n\007CONNECT\020\001\022\021\n\014SEND_C2C_MSG\020\200\002\022\032\n\025SEND" +
-      "_C2C_MSG_RESPONSE\020\201\002\022\021\n\014SYNC_C2C_MSG\020\202\002*" +
-      "#\n\010ChatType\022\007\n\003C2C\020\000\022\016\n\nGROUP_CHAT\020\001B\022\n\020" +
-      "com.donald.protob\006proto3"
+      "\n\013enums.proto*w\n\nActionType\022\013\n\007DEFAULT\020\000" +
+      "\022\r\n\tHEARTBEAT\020\001\022\013\n\007CONNECT\020\002\022\021\n\014SEND_C2C" +
+      "_MSG\020\200\002\022\032\n\025SEND_C2C_MSG_RESPONSE\020\201\002\022\021\n\014S" +
+      "YNC_C2C_MSG\020\202\002*#\n\010ChatType\022\007\n\003C2C\020\000\022\016\n\nG" +
+      "ROUP_CHAT\020\001B\022\n\020com.donald.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

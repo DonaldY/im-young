@@ -5,7 +5,8 @@ option java_package = "com.donald.proto";
 enum ActionType {
 
     DEFAULT = 0;          // 默认
-    CONNECT = 1;          // 连接
+    HEARTBEAT = 1;        // 心跳
+    CONNECT = 2;          // 连接
 
 
     /////////////////////////// 单聊消息 /////////////////////

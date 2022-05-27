@@ -7,6 +7,7 @@ enum ActionType {
     DEFAULT = 0;          // 默认
     HEARTBEAT = 1;        // 心跳
     CONNECT = 2;          // 连接
+    OFFLINE = 3;          // 离线
 
 
     /////////////////////////// 单聊消息 /////////////////////

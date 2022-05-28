@@ -3,9 +3,6 @@ package com.donald.gateway.server;
 import com.donald.gateway.utils.ChannelUtils;
 import io.netty.channel.socket.SocketChannel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

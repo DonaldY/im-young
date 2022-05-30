@@ -14,6 +14,7 @@ enum ActionType {
     SEND_C2C_MSG = 0x100;             // 发送消息
     SEND_C2C_MSG_RESPONSE = 0x101;    // 发送消息响应
     SYNC_C2C_MSG = 0x102;             // 消息多端同步
+    C2C_MSG_ACK = 0x103;              // 消息 ack
 
 
 }

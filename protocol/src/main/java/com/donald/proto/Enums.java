@@ -75,6 +75,14 @@ public final class Enums {
      * <code>SYNC_C2C_MSG = 258;</code>
      */
     SYNC_C2C_MSG(258),
+    /**
+     * <pre>
+     * 消息 ack
+     * </pre>
+     *
+     * <code>C2C_MSG_ACK = 259;</code>
+     */
+    C2C_MSG_ACK(259),
     UNRECOGNIZED(-1),
     ;
 
@@ -134,6 +142,14 @@ public final class Enums {
      * <code>SYNC_C2C_MSG = 258;</code>
      */
     public static final int SYNC_C2C_MSG_VALUE = 258;
+    /**
+     * <pre>
+     * 消息 ack
+     * </pre>
+     *
+     * <code>C2C_MSG_ACK = 259;</code>
+     */
+    public static final int C2C_MSG_ACK_VALUE = 259;
 
 
     public final int getNumber() {
@@ -161,6 +177,7 @@ public final class Enums {
         case 256: return SEND_C2C_MSG;
         case 257: return SEND_C2C_MSG_RESPONSE;
         case 258: return SYNC_C2C_MSG;
+        case 259: return C2C_MSG_ACK;
         default: return null;
       }
     }
@@ -340,12 +357,12 @@ public final class Enums {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013enums.proto*\204\001\n\nActionType\022\013\n\007DEFAULT\020" +
+      "\n\013enums.proto*\226\001\n\nActionType\022\013\n\007DEFAULT\020" +
       "\000\022\r\n\tHEARTBEAT\020\001\022\013\n\007CONNECT\020\002\022\013\n\007OFFLINE" +
       "\020\003\022\021\n\014SEND_C2C_MSG\020\200\002\022\032\n\025SEND_C2C_MSG_RE" +
-      "SPONSE\020\201\002\022\021\n\014SYNC_C2C_MSG\020\202\002*#\n\010ChatType" +
-      "\022\007\n\003C2C\020\000\022\016\n\nGROUP_CHAT\020\001B\022\n\020com.donald." +
-      "protob\006proto3"
+      "SPONSE\020\201\002\022\021\n\014SYNC_C2C_MSG\020\202\002\022\020\n\013C2C_MSG_" +
+      "ACK\020\203\002*#\n\010ChatType\022\007\n\003C2C\020\000\022\016\n\nGROUP_CHA" +
+      "T\020\001B\022\n\020com.donald.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

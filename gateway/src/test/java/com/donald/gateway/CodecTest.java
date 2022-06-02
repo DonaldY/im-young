@@ -7,13 +7,11 @@ import com.donald.gateway.common.protocol.MsgDecoder;
 import com.donald.gateway.common.protocol.MsgEncoder;
 import com.donald.proto.Base;
 import com.donald.proto.Enums;
-import com.google.protobuf.Any;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.UnpooledByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -77,7 +75,7 @@ public class CodecTest {
     @Test
     public void testPingReqMessage() throws Exception {
 
-        final Message message = createMessage();
+        final Message message = createDefaultMessage();
 
         testMessageWithOnlyFixedHeader(message);
     }
@@ -96,7 +94,7 @@ public class CodecTest {
     @Test
     public void testMessage() throws Exception {
 
-        final Message message = createMessage();
+        final Message message = createDefaultMessage();
 
         ByteBuf byteBuf = MsgEncoder.doEncode(ctx, message);
 
@@ -113,7 +111,7 @@ public class CodecTest {
     @Test
     public void testMessageForTooLarge() throws Exception {
 
-        final Message message = createMessage();
+        final Message message = createDefaultMessage();
 
         ByteBuf byteBuf = MsgEncoder.doEncode(ctx, message);
 
@@ -144,7 +142,7 @@ public class CodecTest {
         assertEquals(expected.getVersion(), actual.getVersion());
     }
 
-    private static Message createMessage() {
+    private static Message createDefaultMessage() {
 
         FixedHeader fixedHeader = new FixedHeader(Constants.MAGIC, Constants.VERSION, 0);
 

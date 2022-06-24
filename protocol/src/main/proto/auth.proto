@@ -5,3 +5,15 @@ import "enums.proto";
 
 option java_package = "com.donald.proto";
 
+/**
+ * Desc:     设备注册. 当设备连接服务器时需要调用该请求获得身份验证，在没有完成身份验证前服务器会拒绝服务；如果验证失败，
+ *           服务器将关闭连接，表示连接失败；如果验证成功，则发送 CONNACK
+ * Action:   CONNECT
+ * Transfer: 客户端 -> 服务端
+ * Type:     CONNECT
+ */
+message LoginData {
+
+    // 登录采用 token
+    string token = 1;
+}

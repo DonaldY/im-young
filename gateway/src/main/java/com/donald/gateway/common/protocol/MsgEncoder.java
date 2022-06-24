@@ -35,7 +35,9 @@ public class MsgEncoder extends MessageToMessageEncoder<Message> {
         FixedHeader header = msg.getFixedHeader();
         Base.Request payload = (Base.Request) msg.getPayload();
 
+        // 载荷长度
         int payloadBufferSize = payload.toByteArray().length;
+        // 固定头部长度
         int fixedHeaderBufferSize = 1 + getVariableLengthInt(payloadBufferSize);
         ByteBuf buf = ctx.alloc().buffer(fixedHeaderBufferSize + payloadBufferSize);
 
@@ -54,17 +56,36 @@ public class MsgEncoder extends MessageToMessageEncoder<Message> {
         return ret;
     }
 
+    /**
+     * 根据载荷长度，得到可变长度值
+     *
+     * Tips: 这块数据长度 <= 256M
+     *       即最多 4字节： 2^7 * 2^7 * 2^7 * 2^8 = 256M
+     *       最高位：1 表示有下一个字节存在，后 7 位数据位
+     *
+     *       因为写入消息时候就限制了消息体的长度了
+     *
+     * @param buf buf
+     * @param num 载荷长度： 多少个字节
+     */
     private static void writeVariableLengthInt(ByteBuf buf, int num) {
+        // 每次写一个字节
         do {
             int digit = num % 128;
             num /= 128;
             if (num > 0) {
-                digit |= 0x80;
+                digit |= 0x80;    // 0x80 = 10000000, 异运算后得到 1xxxxxxx
             }
-            buf.writeByte(digit);
+            buf.writeByte(digit); // 写入 1字节
         } while (num > 0);
     }
 
+    /**
+     * 计算可变长度的值
+     *
+     * @param num 载荷长度： 多少个字节
+     * @return 长度
+     */
     private static int getVariableLengthInt(int num) {
         int count = 0;
         do {

@@ -112,9 +112,10 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
      * @return 消息
      */
     private static Result<MessageLite> decodePayload(ByteBuf buffer, int bytesRemainingInVariablePart) {
-
+        // 读取剩余字节
         ByteBuf b = buffer.readRetainedSlice(bytesRemainingInVariablePart);
 
+        // 荷载使用 protobuf， 解析参考 ProtobufDecoder
         final byte[] array;
         final int offset;
         if (b.hasArray()) {
@@ -153,17 +154,20 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
      */
     private static FixedHeader decodeFixedHeader(ByteBuf buffer) {
 
-        // 读取未分配 1字节
+        // 读取未分配 1字节: 固定头部
         short b1 = buffer.readUnsignedByte();
 
+        // 校验魔数
         int magic = b1 >> 4;
         if (magic != Constants.MAGIC) {
 
             throw new IllegalArgumentException("magic number is illegal, " + magic);
         }
 
+        // 解析版本号
         int version = b1 & 0x0f;
 
+        // 计算剩余长度
         int remainingLength = 0;
         int multiplier = 1;
         short digit;

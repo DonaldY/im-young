@@ -151,4 +151,14 @@ public class CodecTest {
 
         return new Message(fixedHeader, request);
     }
+
+    private static Message createConnectMessage() {
+
+        FixedHeader fixedHeader = new FixedHeader(Constants.MAGIC, Constants.VERSION, 0);
+
+        Base.Request request = Base.Request.newBuilder().setAction(Enums.ActionType.CONNECT)
+                .build();
+
+        return new Message(fixedHeader, request);
+    }
 }

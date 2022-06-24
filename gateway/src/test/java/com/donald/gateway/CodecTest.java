@@ -5,8 +5,10 @@ import com.donald.gateway.common.protocol.FixedHeader;
 import com.donald.gateway.common.protocol.Message;
 import com.donald.gateway.common.protocol.MsgDecoder;
 import com.donald.gateway.common.protocol.MsgEncoder;
-import com.donald.proto.Base;
+import com.donald.proto.Auth.LoginData;
+import com.donald.proto.Base.Request;
 import com.donald.proto.Enums;
+import com.google.protobuf.Any;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.UnpooledByteBufAllocator;
@@ -109,6 +111,23 @@ public class CodecTest {
     }
 
     @Test
+    public void testConnectMessage() throws Exception {
+
+        final Message message = createConnectMessage();
+
+        ByteBuf byteBuf = MsgEncoder.doEncode(ctx, message);
+
+        decoder.channelRead(ctx, byteBuf);
+
+        assertEquals(1, out.size());
+
+        final Message decodedMessage = (Message) out.get(0);
+
+        validateFixedHeaders(message.getFixedHeader(), decodedMessage.getFixedHeader());
+        validatePayload(message.getPayload(), decodedMessage.getPayload());
+    }
+
+    @Test
     public void testMessageForTooLarge() throws Exception {
 
         final Message message = createDefaultMessage();
@@ -146,7 +165,7 @@ public class CodecTest {
 
         FixedHeader fixedHeader = new FixedHeader(Constants.MAGIC, Constants.VERSION, 0);
 
-        Base.Request request = Base.Request.newBuilder().setAction(Enums.ActionType.CONNECT)
+        Request request = Request.newBuilder().setAction(Enums.ActionType.DEFAULT)
                 .build();
 
         return new Message(fixedHeader, request);
@@ -156,7 +175,10 @@ public class CodecTest {
 
         FixedHeader fixedHeader = new FixedHeader(Constants.MAGIC, Constants.VERSION, 0);
 
-        Base.Request request = Base.Request.newBuilder().setAction(Enums.ActionType.CONNECT)
+        LoginData loginData = LoginData.newBuilder().setToken("12345678").build();
+
+        Request request = Request.newBuilder().setAction(Enums.ActionType.CONNECT)
+                .setData(Any.pack(loginData))
                 .build();
 
         return new Message(fixedHeader, request);

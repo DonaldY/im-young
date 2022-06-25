@@ -18,7 +18,7 @@ public class HeartbeatConfig {
     private Integer readTimeout;
 
     public HeartbeatConfig() {
-        this.heartbeatInterval = 5000;
+        this.heartbeatInterval = 2 * 6000;
         this.readTimeout = 30000;
     }
 }

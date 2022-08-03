@@ -32,7 +32,7 @@ public class Application implements ApplicationListener<ApplicationReadyEvent> {
 
         } catch (InterruptedException e) {
 
-            log.error("gateway server start error about interrup");
+            log.error("gateway server start error about interrupt");
         }
     }
 }

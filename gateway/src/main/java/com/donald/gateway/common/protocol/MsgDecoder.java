@@ -62,7 +62,7 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
                 // fall through
             } catch (Exception cause) {
 
-                checkpoint(DecoderState.BAD_MESSAGE);
+                out.add(invalidMessage(cause));
                 return;
             }
 
@@ -85,7 +85,7 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
                 break;
             } catch (Exception cause) {
 
-                checkpoint(DecoderState.BAD_MESSAGE);
+                out.add(invalidMessage(cause));
                 return;
             }
 
@@ -98,6 +98,12 @@ public final class MsgDecoder extends ReplayingDecoder<MsgDecoder.DecoderState> 
                 // Shouldn't reach here.
                 throw new Error();
         }
+    }
+
+    private Message invalidMessage(Throwable cause) {
+
+        checkpoint(DecoderState.BAD_MESSAGE);
+        return MessageFactory.newInvalidMessage(fixedHeader, cause);
     }
 
     /**

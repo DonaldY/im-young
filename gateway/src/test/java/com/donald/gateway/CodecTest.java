@@ -14,6 +14,7 @@ import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.UnpooledByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.DecoderException;
 import io.netty.util.ReferenceCountUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,8 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -131,7 +134,6 @@ public class CodecTest {
     public void testMessageForTooLarge() throws Exception {
 
         final Message message = createDefaultMessage();
-
         ByteBuf byteBuf = MsgEncoder.doEncode(ctx, message);
 
         // TODO: 异常，不报错
@@ -149,6 +151,11 @@ public class CodecTest {
 
     private static void validateDecoderExceptionTooLargeMessage(Message message) {
         assertNull(message.getPayload());
+        assertTrue(message.getDecoderResult().isFailure());
+        Throwable cause = message.getDecoderResult().cause();
+        assertThat(cause, instanceOf(DecoderException.class));
+
+        assertTrue(cause.getMessage().contains("too large message:"));
     }
 
     private static void validatePayload(Object expected, Object actual) {
@@ -165,7 +172,14 @@ public class CodecTest {
 
         FixedHeader fixedHeader = new FixedHeader(Constants.MAGIC, Constants.VERSION, 0);
 
-        Request request = Request.newBuilder().setAction(Enums.ActionType.DEFAULT)
+        /**
+         * Request request = Request.newBuilder().setAction(0)
+         *                 .build();
+         * request.toByteArray().length = 0
+         *
+         * 这样就解析失败。
+         */
+        Request request = Request.newBuilder().setAction(Enums.ActionType.CONNECT)
                 .build();
 
         return new Message(fixedHeader, request);

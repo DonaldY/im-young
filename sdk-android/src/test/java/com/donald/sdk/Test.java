@@ -1,4 +1,4 @@
-package com.donald.sdkandroid;
+package com.donald.sdk;
 
 /**
  * @author donald

@@ -7,7 +7,6 @@
         <artifactId>im-young</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>com.donald</groupId>
     <artifactId>sdk-android</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sdk-android</name>

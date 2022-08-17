@@ -15,4 +15,9 @@ public class TcpClient {
     ScheduledFuture<?> scheduledFuture;
 
     ChannelHandlerContext ctx;
+
+    public TcpClient() {
+    }
+
+
 }

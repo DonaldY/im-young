@@ -23,6 +23,13 @@ public class TcpClient {
     public TcpClient() {
     }
 
+    public void connect() {
+
+    }
+
+    void reconnect() {
+
+    }
 
     static class MessageSet {
 

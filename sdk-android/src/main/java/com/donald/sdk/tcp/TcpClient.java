@@ -1,8 +1,12 @@
 package com.donald.sdk.tcp;
 
+import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.ScheduledFuture;
 
 import java.util.Collections;
@@ -16,19 +20,21 @@ import java.util.Set;
 public class TcpClient {
 
     private static final EventLoopGroup threadGroup = new NioEventLoopGroup();
-    ScheduledFuture<?> scheduledFuture;
-
-    ChannelHandlerContext ctx;
+    private ScheduledFuture<?> scheduledFuture;
+    private ChannelHandlerContext ctx;
 
     public TcpClient() {
     }
 
     public void connect() {
-
-    }
-
-    void reconnect() {
-
+        Bootstrap client = new Bootstrap();
+        client.group(threadGroup)
+                .channel(NioSocketChannel.class)
+                .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+                .option(ChannelOption.TCP_NODELAY, true)
+                .option(ChannelOption.SO_KEEPALIVE, true)
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
+               // .handler(new TcpClientChannelInitializer(this));
     }
 
     static class MessageSet {

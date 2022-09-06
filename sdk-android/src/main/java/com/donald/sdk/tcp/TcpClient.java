@@ -20,8 +20,6 @@ import java.util.Set;
 public class TcpClient {
 
     private static final EventLoopGroup threadGroup = new NioEventLoopGroup();
-    private ScheduledFuture<?> scheduledFuture;
-    private ChannelHandlerContext ctx;
 
     public TcpClient() {
     }

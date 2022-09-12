@@ -10,7 +10,7 @@
     <artifactId>sdk-android</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sdk-android</name>
-    <description>Demo project for Spring Boot</description>
+    <description>sdk</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

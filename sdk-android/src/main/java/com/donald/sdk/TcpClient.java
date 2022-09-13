@@ -1,4 +1,4 @@
-package com.donald.sdk.tcp;
+package com.donald.sdk;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;

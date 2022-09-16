@@ -1,10 +1,10 @@
-package com.donald.gateway;
+package com.donald.common;
 
-import com.donald.gateway.common.Constants;
-import com.donald.gateway.common.protocol.FixedHeader;
-import com.donald.gateway.common.protocol.Message;
-import com.donald.gateway.common.protocol.MsgDecoder;
-import com.donald.gateway.common.protocol.MsgEncoder;
+import com.donald.common.constant.Constants;
+import com.donald.common.protocol.FixedHeader;
+import com.donald.common.protocol.Message;
+import com.donald.common.protocol.MsgDecoder;
+import com.donald.common.protocol.MsgEncoder;
 import com.donald.proto.Auth.LoginData;
 import com.donald.proto.Base.Request;
 import com.donald.proto.Enums;
@@ -16,22 +16,23 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.DecoderException;
 import io.netty.util.ReferenceCountUtil;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for MsgEncoder and MsgDecoder.
@@ -44,10 +45,10 @@ public class CodecTest {
     private static final ByteBufAllocator ALLOCATOR = new UnpooledByteBufAllocator(false);
 
     @Mock
-    private final ChannelHandlerContext ctx = mock(ChannelHandlerContext.class);
+    private final ChannelHandlerContext ctx = Mockito.mock(ChannelHandlerContext.class);
 
     @Mock
-    private final Channel channel = mock(Channel.class);
+    private final Channel channel = Mockito.mock(Channel.class);
 
     private final MsgDecoder decoder = new MsgDecoder();
 
@@ -58,18 +59,18 @@ public class CodecTest {
      */
     private final MsgDecoder decoderLimitedMessageSize = new MsgDecoder(1);
 
-    @BeforeEach
+    @Before
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        when(ctx.channel()).thenReturn(channel);
-        when(ctx.alloc()).thenReturn(ALLOCATOR);
-        when(ctx.fireChannelRead(any())).then((Answer<ChannelHandlerContext>) invocation -> {
+        Mockito.when(ctx.channel()).thenReturn(channel);
+        Mockito.when(ctx.alloc()).thenReturn(ALLOCATOR);
+        Mockito.when(ctx.fireChannelRead(ArgumentMatchers.any())).then((Answer<ChannelHandlerContext>) invocation -> {
             out.add(invocation.getArguments()[0]);
             return ctx;
         });
     }
 
-    @AfterEach
+    @After
     public void after() {
         for (Object o : out) {
             ReferenceCountUtil.release(o);
@@ -90,7 +91,7 @@ public class CodecTest {
 
         decoder.channelRead(ctx, byteBuf);
 
-        assertEquals(1, out.size());
+        Assertions.assertEquals(1, out.size());
 
         final Message decodedMessage = (Message) out.get(0);
         validateFixedHeaders(message.getFixedHeader(), decodedMessage.getFixedHeader());
@@ -105,7 +106,7 @@ public class CodecTest {
 
         decoder.channelRead(ctx, byteBuf);
 
-        assertEquals(1, out.size());
+        Assertions.assertEquals(1, out.size());
 
         final Message decodedMessage = (Message) out.get(0);
 
@@ -122,7 +123,7 @@ public class CodecTest {
 
         decoder.channelRead(ctx, byteBuf);
 
-        assertEquals(1, out.size());
+        Assertions.assertEquals(1, out.size());
 
         final Message decodedMessage = (Message) out.get(0);
 
@@ -139,9 +140,9 @@ public class CodecTest {
         // TODO: 异常，不报错
         decoderLimitedMessageSize.channelRead(ctx, byteBuf);
 
-        assertEquals(1, out.size());
+        Assertions.assertEquals(1, out.size());
 
-        assertEquals(0, byteBuf.readableBytes());
+        Assertions.assertEquals(0, byteBuf.readableBytes());
 
         final Message decodedMessage = (Message) out.get(0);
 
@@ -150,17 +151,17 @@ public class CodecTest {
     }
 
     private static void validateDecoderExceptionTooLargeMessage(Message message) {
-        assertNull(message.getPayload());
+        Assertions.assertNull(message.getPayload());
         assertTrue(message.getDecoderResult().isFailure());
         Throwable cause = message.getDecoderResult().cause();
-        assertThat(cause, instanceOf(DecoderException.class));
+        MatcherAssert.assertThat(cause, CoreMatchers.instanceOf(DecoderException.class));
 
-        assertTrue(cause.getMessage().contains("too large message:"));
+        Assertions.assertTrue(cause.getMessage().contains("too large message:"));
     }
 
     private static void validatePayload(Object expected, Object actual) {
 
-        assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     private static void validateFixedHeaders(FixedHeader expected, FixedHeader actual) {

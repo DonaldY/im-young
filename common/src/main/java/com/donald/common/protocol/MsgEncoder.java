@@ -1,4 +1,4 @@
-package com.donald.gateway.common.protocol;
+package com.donald.common.protocol;
 
 import com.donald.proto.Base;
 import io.netty.buffer.ByteBuf;

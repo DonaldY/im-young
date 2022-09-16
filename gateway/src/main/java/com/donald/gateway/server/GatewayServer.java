@@ -1,7 +1,7 @@
 package com.donald.gateway.server;
 
-import com.donald.gateway.common.protocol.MsgDecoder;
-import com.donald.gateway.common.protocol.MsgEncoder;
+import com.donald.common.protocol.MsgDecoder;
+import com.donald.common.protocol.MsgEncoder;
 import com.donald.gateway.config.BaseConfig;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;

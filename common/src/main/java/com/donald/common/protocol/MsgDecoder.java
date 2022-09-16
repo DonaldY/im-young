@@ -1,6 +1,6 @@
-package com.donald.gateway.common.protocol;
+package com.donald.common.protocol;
 
-import com.donald.gateway.common.Constants;
+import com.donald.common.constant.Constants;
 import com.donald.proto.Base;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.MessageLite;

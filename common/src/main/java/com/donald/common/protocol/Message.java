@@ -1,4 +1,4 @@
-package com.donald.gateway.common.protocol;
+package com.donald.common.protocol;
 
 import io.netty.handler.codec.DecoderResult;
 import lombok.Data;

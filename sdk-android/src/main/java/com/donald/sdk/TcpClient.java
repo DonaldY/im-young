@@ -22,6 +22,16 @@ public class TcpClient {
     private final TcpClientChannelHandler tcpClientChannelHandler = new TcpClientChannelHandler();
 
     public TcpClient() {
+
+    }
+
+    public void connect() {
+
+        Bootstrap client = createBootstrap();
+
+    }
+
+    public Bootstrap createBootstrap() {
         Bootstrap client = new Bootstrap();
         client.group(threadGroup)
                 .channel(NioSocketChannel.class)
@@ -38,10 +48,10 @@ public class TcpClient {
                                 .addLast(tcpClientChannelHandler);
                     }
                 });
-
+        return client;
     }
 
-    public void connect() {
-
+    public void close() {
+        this.threadGroup.shutdownGracefully();
     }
 }

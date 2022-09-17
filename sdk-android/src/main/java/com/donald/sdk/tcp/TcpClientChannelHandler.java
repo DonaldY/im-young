@@ -6,13 +6,11 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author donald
  * @date 2022/09/16
  */
-@Slf4j
 @RequiredArgsConstructor
 @ChannelHandler.Sharable
 public class TcpClientChannelHandler extends SimpleChannelInboundHandler<Response> {

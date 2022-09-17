@@ -62,7 +62,7 @@ public class GatewayServer {
                 .addListener((ChannelFutureListener) bindFuture -> {
                     if (bindFuture.isSuccess()) {
 
-                        log.info("网关服务[{}]正在运行", baseConfig.getServerId());
+                        log.info("网关服务[{}]正在运行, port:{}", baseConfig.getServerId(), baseConfig.getPort());
                     } else {
                         bindFuture.channel().closeFuture().sync()
                                 .addListener((ChannelFutureListener) closeFuture -> close());

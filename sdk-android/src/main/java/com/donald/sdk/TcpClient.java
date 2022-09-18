@@ -2,9 +2,11 @@ package com.donald.sdk;
 
 import com.donald.common.protocol.MsgDecoder;
 import com.donald.common.protocol.MsgEncoder;
+import com.donald.sdk.constant.Constants;
 import com.donald.sdk.tcp.TcpClientChannelHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
@@ -25,10 +27,36 @@ public class TcpClient {
 
     }
 
+    public void login() {
+
+        // 1. 获取 Token
+        // 2. 连接服务器
+        connect();
+    }
+
+    /**
+     * 连接服务器
+     *
+     * Tips： 重试
+     * 1. 通过 iplist 获取 ip 和 port
+     * 2. 尝试连接
+     */
     public void connect() {
-
         Bootstrap client = createBootstrap();
-
+        int retry = 0;
+        while (retry < Constants.CONNECT_MAX_RETRY) {
+            /*try {
+                ChannelFuture channelFuture = client.connect(addressInstance.getIp(), addressInstance.getPort()).sync();
+                if (channelFuture.isSuccess()) {
+                    log.debug("与网关[{}]的连接已建立", addressInstance.getServerId());
+                    // 注册网关到路由服务
+                    online((SocketChannel) channelFuture.channel());
+                    return;
+                }
+            } catch (Exception e) {
+                ++retry;
+            }*/
+        }
     }
 
     public Bootstrap createBootstrap() {

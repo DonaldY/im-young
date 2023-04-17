@@ -13,11 +13,13 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author donald
  * @date 2022/08/14
  */
+@Slf4j
 public class TcpClient {
 
     private final EventLoopGroup threadGroup = new NioEventLoopGroup();
